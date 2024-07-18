@@ -1,5 +1,3 @@
-can you make it chat "zzxc show" on roblox game instead of using RightShift key: 
-
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
