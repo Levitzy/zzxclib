@@ -647,6 +647,7 @@ function OrionLib:MakeWindow(WindowConfig)
 	MakeDraggable(DragPoint, MainWindow)
 
 	-- Original close and reopen logic
+-- Original close and reopen logic
 AddConnection(CloseBtn.MouseButton1Up, function()
     MainWindow.Visible = false
     UIHidden = true
@@ -659,8 +660,8 @@ AddConnection(CloseBtn.MouseButton1Up, function()
 end)
 
 -- Modify this part to listen for chat messages
-AddConnection(Player.Chatted, function(Message)
-    if Message:lower() == "zzxc show" then
+ChatService.Chatting:Connect(function(Player, Message)
+    if Player == game.Players.LocalPlayer and Message:lower() == "zzxc show" then
         MainWindow.Visible = true
     end
 end)
