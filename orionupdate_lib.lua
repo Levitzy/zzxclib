@@ -1,7 +1,10 @@
+can you make it chat "zzxc show" on roblox game instead of using RightShift key: 
+
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
 local LocalPlayer = game:GetService("Players").LocalPlayer
+local ChatService = game:GetService("Chat")
 local Mouse = LocalPlayer:GetMouse()
 local HttpService = game:GetService("HttpService")
 
@@ -645,22 +648,24 @@ function OrionLib:MakeWindow(WindowConfig)
 
 	MakeDraggable(DragPoint, MainWindow)
 
-	AddConnection(CloseBtn.MouseButton1Up, function()
-		MainWindow.Visible = false
-		UIHidden = true
-		OrionLib:MakeNotification({
-			Name = "Interface Hidden",
-			Content = "Tap RightShift to reopen the interface",
-			Time = 5
-		})
-		WindowConfig.CloseCallback()
-	end)
+	-- Original close and reopen logic
+AddConnection(CloseBtn.MouseButton1Up, function()
+    MainWindow.Visible = false
+    UIHidden = true
+    OrionLib:MakeNotification({
+        Name = "Interface Hidden",
+        Content = "Type zzxc show in chat to reopen the interface",
+        Time = 5
+    })
+    WindowConfig.CloseCallback()
+end)
 
-	AddConnection(UserInputService.InputBegan, function(Input)
-		if Input.KeyCode == Enum.KeyCode.RightShift and UIHidden then
-			MainWindow.Visible = true
-		end
-	end)
+-- Modify this part to listen for chat messages
+AddConnection(Player.Chatted, function(Message)
+    if Message:lower() == "zzxc show" then
+        MainWindow.Visible = true
+    end
+end)
 
 	AddConnection(MinimizeBtn.MouseButton1Up, function()
 		if Minimized then
